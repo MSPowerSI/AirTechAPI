@@ -14,11 +14,13 @@ router.get('/order', orderController.getOrders)
 
 router.get('/order/month/:month', orderController.getOrdersLastMonth)
 
+
 router.put('/order/:id', orderController.updateOrder)
 
 router.put('/order/status/:id', orderController.updateOrderStatus)
 
 router.put('/user/:id', userController.updateCustomer)
+
 
 router.post('/user', userController.addCustomer)
 
@@ -26,12 +28,13 @@ router.post('/user/email', userController.CustomerByEmail)
 
 router.post('/order', orderController.addOrder)
 
-router.post('/order/cancel/:id', orderController.cancelOrder)
-
 router.post('/authentication/login', authController.loginCustomer)
 
 router.post('/authentication/register', authController.registerCustomer)
 
+
 router.delete('/user/:id', userController.deleteCustomer)
+
+router.delete('/order/:id', orderController.cancelOrder)
 
 module.exports = { routes: router }

@@ -5,9 +5,7 @@ const getOrders = async (request, response) => {
         let retorno = await orderData.getOrders()
         return response.json(retorno)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
@@ -16,9 +14,7 @@ const getOrdersLastMonth = async (request, response) => {
         let retorno = await orderData.getOrdersLastMonth(request.params.month)
         return response.json(retorno)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
@@ -27,9 +23,7 @@ const getOrderById = async (request, response) => {
         let retorno = await orderData.getOrderById(request.params.id)
         return response.json(retorno)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
@@ -39,47 +33,47 @@ const addOrder = async (request, response) => {
 
         return response.json(result)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
 const updateOrder = async (request, response) => {
     try {
-        const result = await orderData.updateOrder(request.params.id, request.body)
+        const updated = await orderData.updateOrder(request.params.id, request.body)
 
-        return response.json(result)
+        return response.json(updated)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
 const updateOrderStatus = async (request, response) => {
     try {
-        const result = await orderData.updateOrderStatus(request.params.id, request.body)
+        const updated = await orderData.updateOrderStatus(request.params.id, request.body)
 
-        return response.json(result)
+        return response.json(updated)
+
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
 const cancelOrder = async (request, response) => {
     try {
-        const result = await orderData.cancelOrder(request.params.id)
+        const cancel = await orderData.cancelOrder(request.params.id)
 
-        return response.json(result)
+        return response.json(cancel)
     } catch (error) {
-        response.status(400).send(error.message)
-        console.log(error.message)
-        return
+        return response.status(400).send(error.message)
     }
 }
 
-module.exports = { getOrders, getOrdersLastMonth, getOrderById, addOrder, updateOrder,
-    updateOrderStatus, cancelOrder }
+module.exports = {
+    getOrders,
+    getOrdersLastMonth,
+    getOrderById,
+    addOrder,
+    updateOrder,
+    updateOrderStatus,
+    cancelOrder
+}

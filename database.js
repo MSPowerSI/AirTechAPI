@@ -5,7 +5,7 @@ async function connect() {
         return global.connection;
 
     const mysql = require('mysql2/promise');
-    const connection = await mysql.createConnection(`mysql://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.IP_DB}/airtech`)
+    const connection = await mysql.createConnection(`mysql://${process.env.USER_DB}:${process.env.PASSWORD_DB}@${process.env.IP_DB}/${process.env.DATABASE_NAME}`)
     console.log("Conectado ao Banco de dados MySQL!")
     global.connection = connection;
     return connection;
@@ -110,7 +110,7 @@ async function updateOrderStatus(id, order) {
 async function cancelOrder(id) {
     const conn = await connect();
     const sql = 'UPDATE orders SET status=? WHERE id=?;'
-    const values = ["Cancelado", id]
+    const values = [0, id]
     return await conn.query(sql, values)
 }
 

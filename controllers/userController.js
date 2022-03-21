@@ -1,6 +1,5 @@
 const userData = require('../data/userData')
 
-
 const getCustomers = async (request, response) => {
     try {
         const clientes = await userData.getCustomers()
@@ -16,7 +15,8 @@ const getCustomer = async (request, response) => {
     try {
         const cliente = await userData.getCustomer(request.params.id)
 
-        let usuario = { 
+
+        return response.json({
             Id: cliente[0].Id,
             taxIdNumber: cliente[0].taxIdNumber,
             firstName: cliente[0].firstName,
@@ -26,9 +26,7 @@ const getCustomer = async (request, response) => {
             phoneNumber: cliente[0].phoneNumber,
             email: cliente[0].email,
             active: cliente[0].active
-        }
-        
-        return response.json(usuario)
+        })
     } catch (error) {
         response.status(400).send(error.message)
         console.log(error.message)
@@ -40,8 +38,9 @@ const CustomerByEmail = async (request, response) => {
     try {
         const cliente = await userData.getCustomerByEmail(request.body.email, true)
 
-        if (cliente) { 
-            let usuario = { 
+        if (cliente) {
+
+            return response.json({
                 Id: cliente.Id,
                 firstName: cliente.firstName,
                 lastName: cliente.lastName,
@@ -50,9 +49,7 @@ const CustomerByEmail = async (request, response) => {
                 phoneNumber: cliente.phoneNumber,
                 email: cliente.email,
                 active: cliente.active
-            }
-            
-            return response.json(usuario)
+            })
         } else {
             return response.status(404).send("E-mail não encontrado.")
         }
@@ -77,7 +74,7 @@ const addCustomer = async (request, response) => {
 const updateCustomer = async (request, response) => {
     try {
         let name = request.body.name
-        request.body.firstName = name.substr(0,name.indexOf(' '));
+        request.body.firstName = name.substr(0, name.indexOf(' '));
 
         if (request.body.firstName == "")
             return response.status(400).send("Informe o nome e sobrenome.")
@@ -104,4 +101,11 @@ const deleteCustomer = async (request, response) => {
     }
 }
 
-module.exports = { getCustomers, getCustomer, CustomerByEmail, addCustomer, updateCustomer, deleteCustomer }
+module.exports = {
+    getCustomers,
+    getCustomer,
+    CustomerByEmail,
+    addCustomer,
+    updateCustomer,
+    deleteCustomer
+}

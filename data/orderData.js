@@ -23,14 +23,6 @@ const addOrder = async (order) => {
     return result[0];
 }
 
-const dataAtualFormatada = () => {
-    const data = new Date(),
-        dia  = data.getDate().toString().padStart(2, '0'),
-        mes  = (data.getMonth() + 1).toString().padStart(2, '0'),
-        ano  = data.getFullYear();
-    return dia + '/' + mes + '/' + ano;
-}
-
 const updateOrder = async (orderId, order) => {
     const update = await database.updateOrder(orderId, order)
     return update[0];
@@ -42,8 +34,8 @@ const updateOrderStatus = async (orderId, order) => {
 }
 
 const cancelOrder = async (orderId) => {
-    const update = await database.cancelOrder(orderId)
-    return update[0];
+    const cancel = await database.cancelOrder(orderId)
+    return cancel[0];
 }
 
 module.exports = { getOrders, getOrdersLastMonth, getOrderById, addOrder, updateOrder,
